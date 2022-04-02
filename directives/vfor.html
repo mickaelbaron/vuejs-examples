@@ -1,0 +1,29 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <div id="app">
+        <p v-for="(val,index) in tab">
+            {{val + "," + index}}
+        </p>
+
+        <p v-for="(val,name,index) in obj">
+            {{val + "," + name + "," + index}}
+        </p>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const tab = ref(['rouge', 'bleu', 'blanc'])
+                const obj = ref({ p1: 'val1', p2: 'val2', p3: 'val3' })
+                return { tab, obj }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

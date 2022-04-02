@@ -1,0 +1,21 @@
+<html>
+<script src="https://unpkg.com/vue@3"></script>
+
+<body>
+    <div id="helloworld">
+        <input v-model="value" type="text" />
+        <p>{{value}}</p>
+    </div>
+
+    <script>
+        Vue.createApp({
+            data() {
+                return {
+                    value: 'HelloWorld'
+                }
+            }
+        }).mount('#helloworld');
+    </script>
+</body>
+
+</html>

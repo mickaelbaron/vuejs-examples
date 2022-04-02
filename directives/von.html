@@ -1,0 +1,32 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+
+    <div id="app">
+        <button @click="increase">Augmenter</button>
+        <button @click.once="decrease">Diminuer</button>
+        <p>{{ value }}</p>
+    </div>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const value = ref(0)
+
+                function increase() {
+                    value.value++;
+                }
+                function decrease() {
+                    value.value--;
+                }
+
+                return { value, increase, decrease }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

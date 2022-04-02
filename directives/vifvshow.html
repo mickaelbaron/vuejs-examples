@@ -1,0 +1,30 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+
+	<div id="app">
+        <input type="checkbox" v-model="show">
+          Afficher Vue.js
+        </input>
+        
+        <img v-show="show" src="https://upload.wikimedia.org/wikipedia/fr/3/3d/Logo-LIAS.png"/>
+        <img v-if="show" src="https://upload.wikimedia.org/wikipedia/commons/9/95/Vue.js_Logo_2.svg"/>
+        <img v-else src="https://mickael-baron.fr/images/mbaron.jpg"/>
+       </div>
+
+    <script>
+        const { createApp, ref } = Vue
+
+        createApp({
+            setup() {
+                const show = ref(true)
+                return {
+                    show
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
