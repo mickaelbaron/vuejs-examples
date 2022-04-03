@@ -1,0 +1,34 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+    <div id="app">
+        <input v-model="writableValue" />
+        <p>{{ value }}</p>
+    </div>
+
+    <script>
+        const { createApp, ref, computed } = Vue
+
+        createApp({
+            setup() {
+                const value = ref('HelloWorld')
+                const writableValue = computed({
+                    get() {
+                        return value.value;
+                    },
+                    set(newValue) {
+                        if (newValue.length <= 10) {
+                            value.value = newValue;
+                        }
+                    }
+                })
+                return {
+                    value, writableValue
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

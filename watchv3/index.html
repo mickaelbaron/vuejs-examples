@@ -1,0 +1,32 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+    <div id="app">
+        <input v-model="value" type="text" />
+        <p>{{ message }}</p>
+    </div>
+
+    <script>
+        const { createApp, ref, watch } = Vue
+
+        createApp({
+            setup() {
+                const value = ref('')
+                const message = ref('Parfait')
+                watch(value, (newValue, oldValue) => {
+                    if (newValue.length > 10) {
+                        message.value = "Trop Grand"
+                    } else {
+                        message.value = "Parfait"
+                    }
+                })
+                return {
+                    value, message
+                }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>
