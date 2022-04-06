@@ -1,0 +1,27 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+    <div id="app">
+        <input v-model="myprop1" type="text" />
+        <p>{{myprop1}}</p>
+        <input v-model="myprop2" type="text" />
+        <p>{{myprop2}}</p>
+    </div>
+
+    <script>
+        const { createApp, reactive, toRefs } = Vue
+
+        createApp({
+            setup() {
+                const data = reactive({ 
+                    myprop1: 'HelloWorld1', 
+                    myprop2: 'HelloWorld2' })
+
+                return { ...toRefs(data) }
+            }
+        }).mount('#app');
+    </script>
+</body>
+
+</html>

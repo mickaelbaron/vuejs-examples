@@ -2,15 +2,18 @@
 
 <body>
     <script src="https://unpkg.com/vue@3"></script>
-    <div id="app">
+    <div id="helloworld">
         <input v-model="value" type="text" />
         <p>{{value}}</p>
-        <Clock></Clock>
+        <Clock :message="value" />
     </div>
 
     <script>
         const Clock = {
-            template: `<div>{{ clock }}</div>`,
+            template: `<div>{{ clock }} {{ message }}</div>`,
+            props: {
+                message: String
+            },
             setup() {
                 const clock = ref(new Date().toLocaleTimeString())
 
@@ -36,7 +39,7 @@
             }
         });
         appInstance.component('Clock', Clock);
-        appInstance.mount('#app');
+        appInstance.mount('#helloworld');
     </script>
 </body>
 

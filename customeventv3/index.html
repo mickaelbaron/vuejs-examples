@@ -2,15 +2,16 @@
 
 <body>
     <script src="https://unpkg.com/vue@3"></script>
+    
     <div id="app">
+        <Clock @save-clock="saveClock($event)"></Clock>
         <input v-model="value" type="text" />
         <p>{{value}}</p>
-        <Clock></Clock>
     </div>
 
     <script>
         const Clock = {
-            template: `<div>{{ clock }}</div>`,
+            template: `<button v-on:click="$emit('save-clock', clock)">{{clock}}</button>`,
             setup() {
                 const clock = ref(new Date().toLocaleTimeString())
 
@@ -32,7 +33,11 @@
             setup() {
                 const value = ref('HelloWorld')
 
-                return { value }
+                function saveClock(currentClock) {
+                    value.value = currentClock;
+                }
+
+                return { value, saveClock }
             }
         });
         appInstance.component('Clock', Clock);

@@ -10,7 +10,7 @@
     <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
     <script>
         const Clock = {
-            template: `<div><button v-on:click="saveClock">{{value}}</button></div>`,
+            template: `<div><button v-on:click="$emit('save-clock', value)">{{value}}</button></div>`,
             data() {
                 return {
                     value: ""
@@ -25,9 +25,6 @@
             methods: {
                 computeClock() {
                     this.value = new Date().toLocaleTimeString();
-                },
-                saveClock() {
-                    this.$emit("save-clock", this.value);
                 }
             }
         }
