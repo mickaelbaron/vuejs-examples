@@ -1,9 +1,9 @@
 import { reactive } from 'vue'
 
+const debug = true
 const state = reactive({
   message: 'HelloWorld'
 })
-const debug = true
 
 function setMessage(newValue) {
   if (debug) console.log('setMessage triggered with ', newValue)

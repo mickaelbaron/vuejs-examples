@@ -1,0 +1,57 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+    <div id="app">
+        <Clock></Clock>
+        <div>
+            <input v-model="value" type="text" />
+        </div>
+    </div>
+
+    <script>
+        const { createApp, ref, inject, provide } = Vue
+
+        const clockDisplayProvide = {
+            template: `{{ message }}`,
+            setup() {
+                const message = inject('message')
+
+                return { message }
+            }
+        }
+
+        const clockProvide = {
+            template: `{{ clock }} <ClockDisplayProvide></ClockDisplayProvide>`,
+            components: {
+                ClockDisplayProvide : clockDisplayProvide
+            },
+            setup() {
+                const clock = ref(new Date().toLocaleTimeString())
+
+                setInterval(() => {
+                    computeClock();
+                }, 1000);
+
+                function computeClock() {
+                    clock.value = new Date().toLocaleTimeString();
+                }
+
+                return { clock }
+            }
+        }
+       
+        const appProvide = createApp({
+            setup() {
+                const value = ref('HelloWorld')
+                provide('message', value)
+
+                return { value }
+            }
+        });
+        appProvide.component('Clock', clockProvide);        
+        appProvide.mount('#app');
+    </script>
+</body>
+
+</html>

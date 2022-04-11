@@ -1,0 +1,43 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+    <div id="app">
+        <Child ref="refChild"></Child>
+        <button @click="refChild.callChild()">Go</button>
+        {{ value }}
+    </div>
+
+    <script>
+        const { createApp, ref, getCurrentInstance } = Vue
+
+        const child = {
+            template: `Enfant`,
+            setup() {
+                const instance = getCurrentInstance()
+                function callChild() {
+                    instance.proxy.$parent.callParent();
+                }
+
+                return { callChild }
+            }
+        }
+
+        const appInstance = createApp({
+            setup() {
+                const refChild = ref(null)
+                const value = ref("")
+
+                function callParent() {
+                    value.value = "Hello"
+                }
+
+                return { value, refChild, callParent }
+            }
+        });
+        appInstance.component('Child', child);
+        appInstance.mount('#app');
+    </script>
+</body>
+
+</html>

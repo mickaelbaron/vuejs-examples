@@ -2,7 +2,7 @@
 <script src="https://unpkg.com/vue@3"></script>
 
 <body>
-    <div id="helloworld">
+    <div id="app">
         <input v-model="value" type="text" />
         <p>{{value}}</p>
     </div>
@@ -14,7 +14,7 @@
                     value: 'HelloWorld'
                 }
             }
-        }).mount('#helloworld');
+        }).mount('#app');
     </script>
 </body>
 

@@ -1,0 +1,63 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+    <div id="app">
+        <div><input v-model="message" type="text" />{{ message }}</div>
+        <div>
+            <Writable></Writable>
+            <Readable></Readable>
+        </div>
+    </div>
+
+    <script>
+        const { createApp, reactive, computed } = Vue
+
+        const debug = true
+        const state = reactive({
+            message: 'HelloWorld'
+        })
+
+        function setMessage(newValue) {
+            if (debug) console.log('setMessage triggered with ', newValue)
+
+            state.message = newValue
+        }
+
+        const readable = {
+            template: `{{ state.message }}`,
+
+            setup() {
+                return { state }
+            }
+        }
+
+        const writable = {
+            template: `<input v-model="state.message" type="text" />`,
+
+            setup() {
+                return { state }
+            }
+        }
+
+        const appInstance = createApp({
+            setup() {
+                const message = computed({
+                    get() {
+                        return state.message
+                    },
+                    set(newValue) {
+                        setMessage(newValue)
+                    }
+                })
+
+                return { message }
+            }
+        });
+        appInstance.component('Readable', readable);
+        appInstance.component('Writable', writable);
+        appInstance.mount('#app');
+    </script>
+</body>
+
+</html>

@@ -2,7 +2,7 @@
 
 <body>
     <script src="https://unpkg.com/vue@3"></script>
-    <div id="helloworld">
+    <div id="app">
         <input v-model="value" type="text" />
         <p>{{value}}</p>
         <Clock :message="value" />
@@ -39,7 +39,7 @@
             }
         });
         appInstance.component('Clock', Clock);
-        appInstance.mount('#helloworld');
+        appInstance.mount('#app');
     </script>
 </body>
 
