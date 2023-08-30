@@ -1,0 +1,37 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+    
+    <div id="app">
+        <FormInput v-model:name="person.name" v-model:city="person.city"></FormInput>
+        <p>{{ person.name }} {{ person.city }}</p>
+    </div>
+
+    <script>
+        const FormInput = {
+            template: `<input :value="name" @input="$emit('update:name', $event.target.value)" />
+                       <input :value="city" @input="$emit('update:city', $event.target.value)" />`,
+            props: {
+                name: String,
+                city: String 
+            },
+            setup() {
+            }
+        }
+
+        const { createApp, reactive } = Vue
+        
+        const appInstance = createApp({
+            setup() {
+                const person = reactive({ name: "", city: "" });
+
+                return { person }
+            }
+        });
+        appInstance.component('forminput', FormInput);
+        appInstance.mount('#app');
+    </script>
+</body>
+
+</html>

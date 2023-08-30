@@ -1,0 +1,35 @@
+<html>
+
+<body>
+    <script src="https://unpkg.com/vue@3"></script>
+    
+    <div id="app">
+        <FormInput v-model="person.name"></FormInput>
+        <p>{{ person.name }}</p>
+    </div>
+
+    <script>
+        const FormInput = {
+            template: `<input :value="modelValue" @input="$emit('update:modelValue', $event.target.value)" />`,
+            props: {
+                modelValue: String
+            },
+            setup() {
+            }
+        }
+
+        const { createApp, reactive } = Vue
+        
+        const appInstance = createApp({
+            setup() {
+                const person = reactive({ name: "" });
+
+                return { person }
+            }
+        });
+        appInstance.component('forminput', FormInput);
+        appInstance.mount('#app');
+    </script>
+</body>
+
+</html>
